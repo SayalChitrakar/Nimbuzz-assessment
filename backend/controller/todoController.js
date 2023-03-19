@@ -50,30 +50,56 @@ export const addTodo = async(request,response)=>{
 export const updateTodo = async (request,response)=>{
 
     try{
-        const isValidId = mongoose.Types.ObjectId.isValid(request.parans.todoId);
+        console.log(request.params);
+        const isValidId = mongoose.Types.ObjectId.isValid(request.params.todoId);
         const {error} =  updateTodoSchema.validate(request.body);
         if(error){
-            response
-            .status(400)
-            .json({
-                status:'Failed',
-                message:error
-            })
+            return(
+                response
+                .status(400)
+                .json({
+                    status:'Failed',
+                    message:error
+                })
+            )
+          
         }
         if(!isValidId){
-            response
-            .status(400)
-            .json({
-                status:'Failed',
-                message:'Not valid Id.'
-            })
+            return(
+                response
+                    .status(400)
+                    .json({
+                        status:'Failed',
+                        message:'Not valid Id.'
+                    })
+            )
         }
-        const updatedTodo = await Todo.findByIdAndUpdate(request.parans.todoId,request.body,{
+        const isValidTodo = await Todo.findById(request.params.todoId);
+        if(!isValidTodo){
+            return(
+                response
+                .status(400)
+                .json({
+                    status:'Failed',
+                    message:'Todo not found.'
+                })
+            )
+        }
+
+        const updatedTodo = await Todo.findByIdAndUpdate(request.params.todoId,request.body,{
             new:true
         });
-
-
+        response
+            .status(200)
+            .json({
+                status:'Success',
+                message:'Todo updated successfully.',
+                data:{
+                    data:updatedTodo
+                }
+            })
     }catch(error){
+        console.log(error);
         console.log('error');
         response.send('Error while updating todo.');
     }
