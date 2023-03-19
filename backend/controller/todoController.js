@@ -36,53 +36,24 @@ export const getOneTodo = async (request, response) => {
     console.log("error while getting one todo.");
   }
 };
-export const getAllPendingTodo = async (request, response) => {
-  try {
-    const pendingTodo = await Todo.find({ status: "PENDING" });
-    response.status(200).json({
-      status: "Success",
-      data: {
-        data: pendingTodo,
-      },
-    });
-  } catch (error) {
-    console.log("error while getting pending todos.");
-    response.send("error while getting pending todos");
-  }
-};
-
-export const getAllCompletedTodo = async (request, response) => {
-  try {
-    const completedTodo = await Todo.find({ status: "COMPLETED" });
-    response.status(200).json({
-      status: "Success",
-      data: {
-        data: completedTodo,
-      },
-    });
-  } catch (error) {
-    console.log("error while getting completed todos.");
-    response.send("error while getting completed todos.");
-  }
-};
 export const addTodo = async (request, response) => {
   try {
     const { error } = todoSchema.validate(request.body);
     if (error) {
-      response.status(400).json({
+      return response.status(400).json({
         status: "Failed",
         message: error,
       });
     }
     const todo = await Todo.create(request.body);
-    response.status(200).json({
+    return response.status(200).json({
       status: "Success",
       data: {
         data: todo,
       },
     });
   } catch (error) {
-    console.log("error while adding todo.");
+    console.log("Error while adding todo.");
     console.log(error);
   }
 };

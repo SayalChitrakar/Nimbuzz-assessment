@@ -1,13 +1,11 @@
 import Joi from "joi";
 
 export const todoSchema = Joi.object({
-  task: Joi.string().required(),
-  status: Joi.string().valid("PENDING", "COMPLETED"),
+  name: Joi.string().required(),
   completionRate: Joi.number(),
 });
 
 export const updateTodoSchema = Joi.object({
-  task: Joi.string(),
-  status: Joi.string().valid("PENDING", "COMPLETED"),
+  name: Joi.string(),
   completionRate: Joi.number(),
 });
