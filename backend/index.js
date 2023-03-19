@@ -1,13 +1,13 @@
-import express from 'express';
+import express from "express";
 const app = express();
-import dotenv from 'dotenv';
-import todoRouter from './routes/todoRoutes.js';
+import dotenv from "dotenv";
+import todoRouter from "./routes/todoRoutes.js";
 
 dotenv.config();
 app.use(express.json());
 
-app.get('/ping',(request,response)=>{
-    response.send('pong')
+app.get("/ping", (request, response) => {
+  response.send("pong");
 });
-app.use('/api/todo',todoRouter);
+app.use("/api/todo", todoRouter);
 export default app;
