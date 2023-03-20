@@ -102,3 +102,35 @@ export const updateTodo = async (request, response) => {
     response.send("Error while updating todo.");
   }
 };
+export const getAllCompletedTodo = async (request, response) => {
+  try {
+    const completedTodo = await Todo.find({
+      status: "COMPLETED",
+    });
+    response.status(200).json({
+      status: "Success",
+      data: {
+        data: completedTodo,
+      },
+    });
+  } catch (error) {
+    console.log("error while getting completed todo.");
+    response.send("error while getting completed todo.");
+  }
+};
+export const getAllPendingTodo = async (request, response) => {
+  try {
+    const getAllPendingTodo = await Todo.find({
+      status: "PENDING",
+    });
+    response.status(200).json({
+      status: "Success",
+      data: {
+        data: pendingTodo,
+      },
+    });
+  } catch (error) {
+    console.log("error while getting pending todo.");
+    response.send("error while getting pending todo.");
+  }
+};

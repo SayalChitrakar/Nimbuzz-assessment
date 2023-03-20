@@ -38,6 +38,24 @@ export const getAllTaskOfTodo = async (request, response) => {
 
 export const addTask = async (request, response) => {
   try {
+    const startDate = new Date(Date.now()); // this is the starting date that looks like ISODate("2014-10-03T04:00:00.188Z")
+
+    startDate.setSeconds(0);
+    startDate.setHours(0);
+    startDate.setMinutes(0);
+
+    const endDate = new Date(startDate);
+    endDate.setHours(23);
+    endDate.setMinutes(59);
+    endDate.setSeconds(59);
+
+    let todaysTodo = await Todo.find({
+      createdAt: { $gt: startDate, $lt: endDate },
+    });
+
+    if (todaysTodo.length === 0) {
+      todaysTodo = await Todo.create();
+    }
     const isValidExists = Todo.findById(request.params.todoId);
     if (!isValidExists) {
       return response.status(400).json({
@@ -45,7 +63,7 @@ export const addTask = async (request, response) => {
         message: "Todo doesnot exists.",
       });
     }
-    console.log(request.body);
+
     const { error } = createTaskSchema.validate(request.body);
     if (error) {
       return response.status(400).json({
@@ -53,7 +71,7 @@ export const addTask = async (request, response) => {
         message: error,
       });
     }
-    const task = await Task.create(request.body);
+    const task = await Task.create({ ...request.body, todo: todaysTodo._id });
     response.status(200).json({
       status: "Success",
       message: "Task added successfully.",
@@ -106,40 +124,5 @@ export const updateTask = async (request, response) => {
       error,
       message: "Error while updating task.",
     });
-  }
-};
-
-export const getAllCompletedTask = async (request, response) => {
-  try {
-    const completedTask = await Task.find({
-      todo: request.params.todoId,
-      status: "COMPLETED",
-    });
-    response.status(200).json({
-      status: "Success",
-      data: {
-        data: completedTask,
-      },
-    });
-  } catch (error) {
-    console.log("error while getting completed tasks.");
-    response.send("error while getting completed tasks.");
-  }
-};
-export const getAllPendingTask = async (request, response) => {
-  try {
-    const pendingTask = await Task.find({
-      todo: request.params.todoId,
-      status: "PENDING",
-    });
-    response.status(200).json({
-      status: "Success",
-      data: {
-        data: pendingTask,
-      },
-    });
-  } catch (error) {
-    console.log("error while getting pending tasks.");
-    response.send("error while getting pending tasks");
   }
 };

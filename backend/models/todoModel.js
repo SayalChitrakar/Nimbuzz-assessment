@@ -4,13 +4,16 @@ const todoSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: [true, "Todo name is required."],
+      required: [true, "Name of todo is required."],
+    },
+    status: {
+      type: String,
     },
     completionRate: {
       type: Number,
       default: 0,
     },
-    createAt: {
+    createdAt: {
       type: Date,
       default: Date.now,
     },
@@ -21,20 +24,5 @@ const todoSchema = new mongoose.Schema(
   }
 );
 
-//virtually populating task in todo.
-todoSchema.virtual("task", {
-  ref: "Task",
-  foreignField: "todo",
-  localField: "_id",
-});
-
-todoSchema.pre(/^find/, function (next) {
-  this.select("_id name completionRate task");
-  this.populate({
-    path: "task",
-    select: "_id name status -todo ",
-  });
-  next();
-});
 const Todo = mongoose.model("Todo", todoSchema);
 export default Todo;
