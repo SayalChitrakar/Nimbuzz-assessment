@@ -120,7 +120,7 @@ export const getAllCompletedTodo = async (request, response) => {
 };
 export const getAllPendingTodo = async (request, response) => {
   try {
-    const getAllPendingTodo = await Todo.find({
+    const pendingTodo = await Todo.find({
       status: "PENDING",
     });
     response.status(200).json({
@@ -132,5 +132,31 @@ export const getAllPendingTodo = async (request, response) => {
   } catch (error) {
     console.log("error while getting pending todo.");
     response.send("error while getting pending todo.");
+  }
+};
+
+export const completionRatePerDay = async (request, response) => {
+  try {
+    const completionRate = await Todo.aggregate([
+      {
+        $group: {
+          _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
+          data: { $push: "$$ROOT" },
+          numberOfTask: { $sum: 1 },
+          numberOfCompletedTask: {
+            $sum: {
+              $cond: [{ $eq: ["status", "COMPLETED"] }, 1, 0],
+            },
+          },
+        },
+      },
+    ]);
+    response
+      .status(200)
+      .json({ status: "Success", data: { data: completionRate } });
+    console.log(completionRate);
+  } catch (error) {
+    console.log(error);
+    return response.status(400).json({ staus: "Failed", error });
   }
 };
