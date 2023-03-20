@@ -145,8 +145,23 @@ export const completionRatePerDay = async (request, response) => {
           numberOfTask: { $sum: 1 },
           numberOfCompletedTask: {
             $sum: {
-              $cond: [{ $eq: ["status", "COMPLETED"] }, 1, 0],
+              $cond: [{ $eq: ["$status", "COMPLETED"] }, 1, 0],
             },
+          },
+        },
+      },
+      {
+        $project: {
+          data: "$data",
+          numberOfTask: "$numberOfTask",
+          numberOfCompletedTask: "$numberOfCompletedTask",
+          completionRate: {
+            $multiply: [
+              {
+                $divide: ["$numberOfCompletedTask", "$numberOfTask"],
+              },
+              100,
+            ],
           },
         },
       },
@@ -154,7 +169,6 @@ export const completionRatePerDay = async (request, response) => {
     response
       .status(200)
       .json({ status: "Success", data: { data: completionRate } });
-    console.log(completionRate);
   } catch (error) {
     console.log(error);
     return response.status(400).json({ staus: "Failed", error });
