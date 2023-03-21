@@ -7,11 +7,11 @@
 }
 .mainContainer h2{
     padding: 10px;
-    color:gray;
+    color:orange;
 }
 .todoContainer{
-    width:80%;
-    padding:20px;
+    padding:30px;
+    width:60%;
     border-radius: 8px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }

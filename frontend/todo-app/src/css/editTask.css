@@ -1,0 +1,18 @@
+.top-bar{
+    display: flex;
+    justify-content: flex-end;
+
+}
+.editContainer{
+    z-index: 100;
+}
+.model-wrapper{
+    background-color: black;
+    position:fixed;
+    left:0;
+    right: 0;
+    top:0;
+    bottom: 0;
+    opacity: 0.6;
+    z-index: 3;
+}

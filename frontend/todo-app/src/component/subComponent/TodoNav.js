@@ -5,16 +5,7 @@ const TodoNav = ({ handleNavState, navState }) => {
     handleNavState(stateValue);
   };
   return (
-    <div className="todoNav row">
-      <button
-        className={
-          navState === "All" ? "btn col-4 selectedNavBtn" : "btn col-4"
-        }
-        id="allBtn"
-        onClick={() => handleChildState("All")}
-      >
-        All
-      </button>
+    <div className="todoNav ">
       <button
         className={
           navState === "Pending" ? "btn col-4 selectedNavBtn" : "btn col-4"
@@ -32,6 +23,15 @@ const TodoNav = ({ handleNavState, navState }) => {
         onClick={() => handleChildState("Completed")}
       >
         Completed
+      </button>
+      <button
+        className={
+          navState === "All" ? "btn col-4 selectedNavBtn" : "btn col-4"
+        }
+        id="allBtn"
+        onClick={() => handleChildState("All")}
+      >
+        All
       </button>
     </div>
   );

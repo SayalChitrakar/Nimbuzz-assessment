@@ -92,9 +92,7 @@ export const updateTodo = async (request, response) => {
     response.status(200).json({
       status: "Success",
       message: "Todo updated successfully.",
-      data: {
-        data: updatedTodo,
-      },
+      data: updateTodo,
     });
   } catch (error) {
     console.log(error);

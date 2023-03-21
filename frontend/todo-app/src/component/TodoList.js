@@ -4,7 +4,7 @@ import TodoNav from "./subComponent/TodoNav";
 import TaskList from "./subComponent/TaskList";
 
 const TodoList = ({ submitState }) => {
-  const [navState, setNavState] = React.useState("All");
+  const [navState, setNavState] = React.useState("Pending");
   const handleNavState = (navState) => {
     setNavState(navState);
   };
