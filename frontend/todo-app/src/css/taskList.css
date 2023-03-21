@@ -1,0 +1,34 @@
+.taskListContainer{
+    margin-top: 20px;
+    padding:10px;
+    height:300px;
+    overflow: auto;
+    display: flex !important;
+    flex-direction: column;
+}
+.task{
+    height: auto;
+    width: 100%;
+    color:gray;
+    border-bottom: 1px solid lightgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:15px 5px 1px 5px !important;
+}
+.task-item{
+    text-align: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.task-item p{
+    width: 100%;
+    height: 100% !important;
+    font-size: 14px;
+    margin: auto;
+    padding-left: 10px;
+    word-wrap: break-word;
+}
+.task-fun{
+}

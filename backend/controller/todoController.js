@@ -109,9 +109,7 @@ export const getAllCompletedTodo = async (request, response) => {
     });
     response.status(200).json({
       status: "Success",
-      data: {
-        data: completedTodo,
-      },
+      data: completedTodo,
     });
   } catch (error) {
     console.log("error while getting completed todo.");
@@ -125,9 +123,7 @@ export const getAllPendingTodo = async (request, response) => {
     });
     response.status(200).json({
       status: "Success",
-      data: {
-        data: pendingTodo,
-      },
+      data: pendingTodo,
     });
   } catch (error) {
     console.log("error while getting pending todo.");
