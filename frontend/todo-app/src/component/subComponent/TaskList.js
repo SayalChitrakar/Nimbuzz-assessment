@@ -6,9 +6,8 @@ import { CiEdit } from "react-icons/ci";
 import { MdOutlineDone } from "react-icons/md";
 import EditTask from "./EditTask";
 
-const TaskList = ({ navState, submitState }) => {
+const TaskList = ({ navState, forceRender }) => {
   const [todoData, setTodoData] = React.useState([]);
-  const [forceRender, setForceRender] = React.useState(false);
   const [editStatus, setEditStatus] = React.useState(false);
   const [currentEditData, setCurrentEditData] = React.useState({});
   const completeTodo = async (todoItem) => {
@@ -18,9 +17,7 @@ const TaskList = ({ navState, submitState }) => {
         status: "COMPLETED",
       }
     );
-    setForceRender(!forceRender);
-
-    console.log(currentEditData);
+    forceRender.setForceRender((prev) => !prev);
   };
   const editTodo = async (data) => {
     setCurrentEditData(data);
@@ -39,7 +36,7 @@ const TaskList = ({ navState, submitState }) => {
       setTodoData(data.data.data);
     };
     fetchData();
-  }, [navState, submitState, forceRender]);
+  }, [navState, forceRender.forceRender]);
 
   return (
     <div className="mainListContainer">
@@ -116,7 +113,7 @@ const TaskList = ({ navState, submitState }) => {
       {editStatus && (
         <div className="editContainer">
           <EditTask
-            setForceRender={setForceRender}
+            setForceRender={forceRender.setForceRender}
             setEditStatus={setEditStatus}
             currentEditData={currentEditData}
           />

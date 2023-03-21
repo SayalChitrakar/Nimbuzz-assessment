@@ -1,7 +1,7 @@
 import React from "react";
 import "./../css/todo.css";
 import axios from "axios";
-const Todo = ({ submitState, changeSubmitState }) => {
+const Todo = ({ forceRender }) => {
   const [task, changeTask] = React.useState("");
 
   const handleTaskChange = (event) => {
@@ -15,12 +15,11 @@ const Todo = ({ submitState, changeSubmitState }) => {
       });
     }
     changeTask("");
-    changeSubmitState(!submitState);
+    forceRender.setForceRender((prev) => !prev);
   };
   return (
     <>
       <div className="container mainContainer">
-        <h2>Nimbuzz Todo app</h2>
         <div className="todoContainer">
           <form>
             <div className="input-group">

@@ -160,9 +160,7 @@ export const completionRatePerDay = async (request, response) => {
         },
       },
     ]);
-    response
-      .status(200)
-      .json({ status: "Success", data: { data: completionRate } });
+    response.status(200).json({ status: "Success", data: completionRate });
   } catch (error) {
     console.log(error);
     return response.status(400).json({ staus: "Failed", error });

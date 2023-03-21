@@ -3,7 +3,7 @@ import "./../css/todo.css";
 import TodoNav from "./subComponent/TodoNav";
 import TaskList from "./subComponent/TaskList";
 
-const TodoList = ({ submitState }) => {
+const TodoList = ({ submitState, forceRender }) => {
   const [navState, setNavState] = React.useState("Pending");
   const handleNavState = (navState) => {
     setNavState(navState);
@@ -19,7 +19,11 @@ const TodoList = ({ submitState }) => {
         }}
       >
         <TodoNav handleNavState={handleNavState} navState={navState} />
-        <TaskList navState={navState} submitState={submitState} />
+        <TaskList
+          navState={navState}
+          submitState={submitState}
+          forceRender={forceRender}
+        />
       </div>
     </div>
   );
