@@ -11,12 +11,13 @@ const TaskList = ({ navState, forceRender }) => {
   const [editStatus, setEditStatus] = React.useState(false);
   const [currentEditData, setCurrentEditData] = React.useState({});
   const completeTodo = async (todoItem) => {
-    const compledData = await axios.patch(
-      `http://localhost:3001/api/todo/${todoItem}`,
-      {
-        status: "COMPLETED",
-      }
-    );
+    await axios.patch(`http://localhost:3001/api/todo/${todoItem}`, {
+      status: "COMPLETED",
+    });
+    forceRender.setForceRender((prev) => !prev);
+  };
+  const deleteTodo = async (todo) => {
+    await axios.delete(`http://localhost:3001/api/todo/${todo._id}`);
     forceRender.setForceRender((prev) => !prev);
   };
   const editTodo = async (data) => {
@@ -101,7 +102,13 @@ const TaskList = ({ navState, forceRender }) => {
                   >
                     <CiEdit />
                   </button>
-                  <button className="btn" style={{ color: "#dc3545" }}>
+                  <button
+                    className="btn"
+                    style={{ color: "#dc3545" }}
+                    onClick={() => {
+                      deleteTodo(data);
+                    }}
+                  >
                     <AiOutlineDelete />
                   </button>
                 </div>

@@ -7,6 +7,7 @@ import {
   getAllPendingTodo,
   getAllCompletedTodo,
   completionRatePerDay,
+  deleteTodo,
 } from "./../controller/todoController.js";
 
 const todoRouter = express.Router();
@@ -19,6 +20,10 @@ todoRouter.route("/completed").get(getAllCompletedTodo);
 
 todoRouter.route("/task/completion-rate").get(completionRatePerDay);
 
-todoRouter.route("/:todoId").get(getOneTodo).patch(updateTodo);
+todoRouter
+  .route("/:todoId")
+  .get(getOneTodo)
+  .patch(updateTodo)
+  .delete(deleteTodo);
 
 export default todoRouter;

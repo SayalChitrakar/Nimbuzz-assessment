@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 
 export const getAllTodo = async (request, response) => {
   try {
-    const todo = await Todo.find();
+    const todo = await Todo.find().sort({ createdAt: -1 });
     response.status(200).json({
       status: "success",
       data: todo,
@@ -104,7 +104,7 @@ export const getAllCompletedTodo = async (request, response) => {
   try {
     const completedTodo = await Todo.find({
       status: "COMPLETED",
-    });
+    }).sort({ createdAt: -1 });
     response.status(200).json({
       status: "Success",
       data: completedTodo,
@@ -118,7 +118,7 @@ export const getAllPendingTodo = async (request, response) => {
   try {
     const pendingTodo = await Todo.find({
       status: "PENDING",
-    });
+    }).sort({ createdAt: -1 });
     response.status(200).json({
       status: "Success",
       data: pendingTodo,
@@ -126,6 +126,27 @@ export const getAllPendingTodo = async (request, response) => {
   } catch (error) {
     console.log("error while getting pending todo.");
     response.send("error while getting pending todo.");
+  }
+};
+
+export const deleteTodo = async (request, response) => {
+  try {
+    const isValidTodo = await Todo.findById(request.params.todoId);
+    if (!isValidTodo) {
+      return response.status(404).json({
+        status: "Failed",
+        message: "Todo not found.",
+      });
+    }
+
+    await Todo.findByIdAndDelete(request.params.todoId);
+    response.status(204).json({
+      status: "success",
+      data: null,
+    });
+  } catch (error) {
+    console.log("error while deleting todo.");
+    response.send("error while deleting todo.");
   }
 };
 
@@ -144,6 +165,7 @@ export const completionRatePerDay = async (request, response) => {
           },
         },
       },
+      { $sort: { _id: -1 } },
       {
         $project: {
           data: "$data",
