@@ -5,7 +5,7 @@ Installation
 To use this project, follow these steps:
 
 1) Create a .env file inside the backend folder.
-2) Inside the .env file, set the MONGODB_URI variable to your MongoDB database link, and set the PORT variable to the desired port (e.g. PORT=3000).
+2) Inside the .env file, set the DATABASE variable to your MongoDB database link, and set the PORT variable to the desired port (e.g. PORT=3000).
 3) Use the command npm install to install the dependencies for both the backend and frontend.
 4) Use the command npm run start to start the backend and frontend servers.
 
