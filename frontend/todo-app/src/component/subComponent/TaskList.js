@@ -25,7 +25,6 @@ const TaskList = ({ navState, forceRender }) => {
     setEditStatus(true);
   };
   React.useEffect(() => {
-    console.log("running");
     const fetchData = async () => {
       const api =
         navState === "All"
@@ -45,7 +44,7 @@ const TaskList = ({ navState, forceRender }) => {
         {todoData.map((data) => {
           let date = data.createdAt.slice(0, 10);
           return (
-            <div className="task">
+            <div className="task" key={data._id}>
               <div
                 className="task-item col-4"
                 style={{
