@@ -19,7 +19,7 @@ const Todo = ({ forceRender }) => {
   };
   return (
     <>
-      <div className="container mainContainer">
+      <div className="container mainContainer todoHeader">
         <div className="todoContainer">
           <form>
             <div className="input-group">

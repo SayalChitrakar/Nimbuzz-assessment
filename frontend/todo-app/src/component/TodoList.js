@@ -9,7 +9,7 @@ const TodoList = ({ submitState, forceRender }) => {
     setNavState(navState);
   };
   return (
-    <div className="container mainContainer">
+    <div className="container mainContainer todoList">
       <div
         className="todoContainer"
         style={{

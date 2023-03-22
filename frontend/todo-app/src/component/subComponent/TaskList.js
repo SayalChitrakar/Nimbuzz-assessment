@@ -44,9 +44,9 @@ const TaskList = ({ navState, forceRender }) => {
         {todoData.map((data) => {
           let date = data.createdAt.slice(0, 10);
           return (
-            <div className="task" key={data._id}>
+            <div className="task row" style={{ margin: "0px" }} key={data._id}>
               <div
-                className="task-item col-4"
+                className="task-item col-4 task-all"
                 style={{
                   display: "flex",
                   flexDirection: "row-reverse",
@@ -54,7 +54,10 @@ const TaskList = ({ navState, forceRender }) => {
                   alignItems: "center",
                 }}
               >
-                <p style={{ width: "100%", textAlign: "justify" }}>
+                <p
+                  className="task-item-text"
+                  style={{ width: "100%", textAlign: "left" }}
+                >
                   {data.name}
                 </p>
                 {navState === "All" && (
@@ -72,11 +75,11 @@ const TaskList = ({ navState, forceRender }) => {
                   </div>
                 )}
               </div>
-              <div className="task-item col -4">
-                <p> {date}</p>
+              <div className="task-item col-4">
+                <p className="task-item-text date"> {date}</p>
               </div>
               <div
-                className="task-item col -4"
+                className="task-item col-4 task-item-button"
                 style={{ justifyContent: "flex-end" }}
               >
                 <div className="task-fun">
@@ -88,7 +91,7 @@ const TaskList = ({ navState, forceRender }) => {
                         completeTodo(data._id);
                       }}
                     >
-                      <MdOutlineDone />
+                      <MdOutlineDone className="task-icon" />
                     </button>
                   )}
 
@@ -99,7 +102,7 @@ const TaskList = ({ navState, forceRender }) => {
                       editTodo(data);
                     }}
                   >
-                    <CiEdit />
+                    <CiEdit className="task-icon" />
                   </button>
                   <button
                     className="btn"
@@ -108,7 +111,7 @@ const TaskList = ({ navState, forceRender }) => {
                       deleteTodo(data);
                     }}
                   >
-                    <AiOutlineDelete />
+                    <AiOutlineDelete className="task-icon" />
                   </button>
                 </div>
               </div>

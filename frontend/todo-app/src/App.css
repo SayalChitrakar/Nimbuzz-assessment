@@ -17,7 +17,6 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
 .App-link {
   color: #61dafb;
 }
@@ -30,3 +29,14 @@
     transform: rotate(360deg);
   }
 }
+@media (max-width: 995px) {
+ 
+  .appRow{
+    flex-direction: column;
+  }
+  .appCol{
+    width:100% !important;
+  }
+}
+
+

@@ -14,7 +14,15 @@ const CompletionRate = ({ forceRender }) => {
     getData();
   }, [forceRender.forceRender]);
   return (
-    <div className="container mainContainer" style={{ height: "100%" }}>
+    <div
+      className="container mainContainer"
+      style={{
+        height: "100%",
+        width: "100%",
+        paddingLeft: "0px",
+        paddingRight: "0px",
+      }}
+    >
       <div className="todoContainer" style={{ height: "100%" }}>
         <h4
           style={{

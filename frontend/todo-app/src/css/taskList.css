@@ -1,7 +1,7 @@
 .taskListContainer{
     margin-top: 20px;
     padding:20px;
-    height:200px;
+    height:300px;
     overflow: auto;
     display: flex !important;
     flex-direction: column;
@@ -67,3 +67,50 @@
     width: 100%;
     font-size: 6px;
 }
+
+@media (max-width: 767px) {
+    .task{
+        flex-direction: column;
+    }
+    .task-item{
+        width: 100% !important;
+    }
+    .task-item-text{
+        padding:8px 5px 5px 0px;
+        text-align: center !important;
+        width: 100% !important;
+
+    }
+    .date{
+        font-size: 10px !important;
+        color: orange;
+        border:none;
+    }
+   
+    .task-fun{
+        display: flex;
+        align-items: center;
+        justify-content: center !important;
+    }
+   .task-fun button{
+    padding:10px;
+   }
+   .task-icon{
+    width:10px;
+   }
+   .task-item-button{
+    justify-content: center !important;
+   }
+   .task-all{
+    flex-direction: column-reverse !important;
+   }
+   .todoStatus{
+    transform: translate(0) !important;
+    width:80%;
+    padding:3px;
+   }
+   .todoStatus p{
+    font-size: 8px;
+   }
+  }
+  

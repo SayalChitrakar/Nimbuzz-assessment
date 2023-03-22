@@ -1,5 +1,5 @@
 .completionRateList{
-    height:280px;
+    height:250px;
     color:gray;
     font-size: 14px;
 }
@@ -13,3 +13,5 @@
 ::-webkit-scrollbar-thumb {
     background-color: orange; /* Change the thumb color as needed */
 }
+
+  
